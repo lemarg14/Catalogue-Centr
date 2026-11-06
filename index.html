@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catalogue Pro — Miroirs Instagram & Stop-trottoirs miroir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#121212; --ink-2:#3a3a3a; --mute:#7a7a7a; --paper:#f4f2ee; --card:#ffffff;
+    --line:#dedad3; --chrome:linear-gradient(135deg,#f7f7f7 0%,#bfc3c7 28%,#ffffff 50%,#9ea3a8 72%,#e9eaeb 100%);
+    --accent:#b0503a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Manrope,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+
+  /* Header */
+  header.top{position:sticky;top:0;z-index:10;background:rgba(244,242,238,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{font-weight:700;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
+  .brand span{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--chrome);margin-right:8px;border:1px solid #aaa;vertical-align:-1px}
+  nav a{color:var(--ink-2);text-decoration:none;font-size:14px;margin-left:22px}
+  nav a:hover{color:var(--ink)}
+  @media(max-width:640px){nav a:not(.cta-s){display:none}}
+  .cta-s{background:var(--ink);color:#fff!important;padding:8px 14px;border-radius:999px}
+
+  /* Hero */
+  .hero{padding:72px 0 56px}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);font-weight:600}
+  .hero h1{font-size:clamp(44px,7vw,88px);line-height:.98;margin:18px 0 22px;letter-spacing:-.01em}
+  .hero h1 em{font-style:italic;background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px #8d9196}
+  .hero p.lead{font-size:19px;color:var(--ink-2);max-width:620px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:end}
+  .hero-imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .hero-imgs img{border-radius:14px;aspect-ratio:3/4;object-fit:cover;width:100%}
+  .hero-imgs img:last-child{margin-top:40px}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:56px}
+  .stats div{background:var(--card);padding:22px}
+  .stats b{display:block;font-size:15px;margin-bottom:4px}
+  .stats small{color:var(--mute);font-size:14px}
+  @media(max-width:700px){.stats{grid-template-columns:1fr}}
+
+  /* Section */
+  section{padding:72px 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(34px,4.5vw,54px);line-height:1}
+  .ref{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:600}
+
+  /* Product */
+  .product{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px}
+  @media(max-width:900px){.product{grid-template-columns:1fr;padding:18px}}
+  .gallery .main{border-radius:14px;overflow:hidden;background:#eee;aspect-ratio:1/1}
+  .gallery .main img{width:100%;height:100%;object-fit:cover}
+  .thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
+  .thumbs button{border:2px solid transparent;border-radius:10px;overflow:hidden;padding:0;cursor:pointer;aspect-ratio:1/1;background:#eee}
+  .thumbs button.on{border-color:var(--ink)}
+  .thumbs img{width:100%;height:100%;object-fit:cover}
+  .info h3{font-size:40px;line-height:1.02;margin:8px 0 14px}
+  .info .pitch{color:var(--ink-2);font-size:16.5px}
+  .price{display:flex;align-items:baseline;gap:12px;margin:24px 0 6px;flex-wrap:wrap}
+  .price b{font-size:46px;font-weight:700;letter-spacing:-.02em}
+  .price span{color:var(--mute);font-size:15px}
+  .format{display:inline-block;font-size:13px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:5px 12px;margin-bottom:20px}
+  ul.feat{list-style:none;display:grid;gap:10px;margin:6px 0 24px}
+  ul.feat li{padding-left:26px;position:relative;font-size:15px}
+  ul.feat li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;border-radius:3px;background:var(--chrome);border:1px solid #9a9ea3}
+  table.spec{width:100%;border-collapse:collapse;font-size:14px}
+  table.spec td{padding:10px 0;border-top:1px solid var(--line);vertical-align:top}
+  table.spec td:first-child{color:var(--mute);width:42%}
+  .ideal{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+  .ideal span{font-size:13px;background:var(--paper);border-radius:999px;padding:6px 12px}
+
+  /* Compare */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:760px){.compare{grid-template-columns:1fr}}
+  .cmp{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+  .cmp h4{font-size:28px;margin-bottom:6px}
+  .cmp p{color:var(--ink-2);font-size:15px}
+
+  /* Process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+  @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr}}
+  .step{border-top:2px solid var(--ink);padding-top:16px;counter-increment:s}
+  .step::before{content:"0" counter(s);font-family:"Instrument Serif",serif;font-size:42px;line-height:1;display:block;margin-bottom:10px}
+  .step b{display:block;margin-bottom:4px}
+  .step p{color:var(--ink-2);font-size:14.5px}
+
+  /* Simulateur */
+  .quote{background:var(--ink);color:#fff;border-radius:22px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:36px}
+  @media(max-width:800px){.quote{grid-template-columns:1fr;padding:24px}}
+  .quote h2{font-size:clamp(34px,4vw,48px);line-height:1;margin-bottom:12px}
+  .quote p{color:#bdbdbd}
+  .row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #333;gap:12px}
+  .row label{font-size:15px}
+  .row label small{display:block;color:#9a9a9a;font-size:13px}
+  .qty{display:flex;align-items:center;gap:6px}
+  .qty button{width:34px;height:34px;border-radius:50%;border:1px solid #555;background:transparent;color:#fff;font-size:18px;cursor:pointer}
+  .qty button:hover{background:#2a2a2a}
+  .qty output{min-width:28px;text-align:center;font-weight:700}
+  .tot{display:flex;justify-content:space-between;padding-top:16px;font-size:15px;color:#bdbdbd}
+  .tot.big{font-size:22px;color:#fff;font-weight:700}
+  .copy{margin-top:20px;width:100%;padding:14px;border-radius:999px;border:none;background:var(--chrome);color:var(--ink);font-weight:700;font-size:15px;cursor:pointer}
+  .copied{font-size:13px;color:#9a9a9a;text-align:center;margin-top:8px;min-height:18px}
+
+  /* FAQ */
+  details{border-top:1px solid var(--line);padding:18px 0}
+  details:last-child{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between}
+  summary::after{content:"+";font-weight:400;font-size:22px;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--ink-2);margin-top:10px;max-width:760px}
+
+  .btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:none;cursor:pointer}
+  .btn svg{width:18px;height:18px;flex:none}
+  .btn-wa{background:#25D366;color:#0b2e17}
+  .btn-call{background:var(--chrome);color:var(--ink)}
+  .btn-dark{background:var(--ink);color:#fff}
+  .linklike{background:none;border:none;color:#9a9a9a;font-size:13px;text-decoration:underline;cursor:pointer;margin-top:12px;display:block;margin-left:auto;margin-right:auto}
+  .contact{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:40px;text-align:center}
+  .contact h2{font-size:clamp(34px,4.5vw,54px);line-height:1;margin:10px 0 12px}
+  .contact p{color:var(--ink-2);max-width:560px;margin:0 auto}
+  .contact .num{font-size:28px;font-weight:700;letter-spacing:.02em;margin:22px 0 4px}
+  .contact .btns{max-width:520px;margin:20px auto 0}
+  @media(max-width:520px){.btns{grid-template-columns:1fr}.contact{padding:26px 18px}}
+  .fab{position:fixed;right:18px;bottom:18px;z-index:20;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .fab svg{width:30px;height:30px}
+  footer{padding:40px 0 60px;color:var(--mute);font-size:13px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span></span>Centr Supply</div>
+    <nav>
+      <a href="#stop-trottoir">Stop-trottoir</a>
+      <a href="#miroir-led">Miroir LED</a>
+      <a href="#process">Personnalisation</a>
+      <a href="#devis">Devis</a>
+      <a href="#contact" class="cta-s">07 75 75 81 21</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Catalogue professionnel · Commerces, salons, restaurants</div>
+        <h1 class="serif">Votre devanture devient un <em>spot photo</em>.</h1>
+        <p class="lead">Deux supports miroir personnalisés à votre marque : vos clients s'y prennent en photo, publient, et font connaître votre commerce sur les réseaux, sans budget pub.</p>
+      </div>
+      <div class="hero-imgs">
+        <img src="img/miroir-led.jpg" alt="Miroir Instagram LED en forme de smartphone">
+        <img src="img/stop-salon-2.jpg" alt="Stop-trottoir miroir personnalisé pour un salon">
+      </div>
+    </div>
+
+    <div class="stats">
+      <div><b>100 % personnalisé</b><small>Logo, nom de compte, horaires, téléphone, accroche</small></div>
+      <div><b>Maquette offerte</b><small>Vous validez le visuel avant fabrication</small></div>
+      <div><b>Prix pro HT</b><small>Tarifs pensés pour les commerces indépendants</small></div>
+    </div>
+  </div>
+
+  <!-- PRODUIT 1 -->
+  <section id="stop-trottoir">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="serif">Stop-trottoir miroir</h2>
+        <div class="ref">Réf. 01 · Extérieur</div>
+      </div>
+
+      <div class="product">
+        <div class="gallery" data-gallery>
+          <div class="main"><img src="img/stop-salon-1.jpg" alt="Stop-trottoir miroir personnalisé"></div>
+          <div class="thumbs">
+            <button class="on" data-src="img/stop-salon-1.jpg"><img src="img/stop-salon-1.jpg" alt=""></button>
+            <button data-src="img/stop-salon-2.jpg"><img src="img/stop-salon-2.jpg" alt=""></button>
+            <button data-src="img/stop-cafe.jpg"><img src="img/stop-cafe.jpg" alt=""></button>
+            <button data-src="img/stop-pilates.jpg"><img src="img/stop-pilates.jpg" alt=""></button>
+            <button data-src="img/stop-atelier-1.jpg"><img src="img/stop-atelier-1.jpg" alt=""></button>
+            <button data-src="img/stop-atelier-2.jpg"><img src="img/stop-atelier-2.jpg" alt=""></button>
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="eyebrow">Chevalet double face · Inox poli miroir</div>
+          <h3 class="serif">Le chevalet qu'on ne croise pas sans se regarder.</h3>
+          <p class="pitch">Un stop-trottoir en acier inoxydable poli miroir, marqué à vos couleurs. Les passants s'y voient, s'arrêtent et lisent votre message. Il annonce vos horaires, votre offre ou votre numéro et sert de spot selfie devant la porte.</p>
+
+          <div class="price"><b>259 €</b><span>HT / unité · 310,80 € TTC</span></div>
+          <div class="format">Format 60 × 45 cm</div>
+
+          <ul class="feat">
+            <li>Acier inoxydable poli miroir : ne rouille pas, résiste à la pluie</li>
+            <li>Double face, visible dans les deux sens de passage</li>
+            <li>Pliable et léger : se rentre en un geste le soir</li>
+            <li>Marquage personnalisé : logo, horaires, téléphone, accroche</li>
+          </ul>
+
+          <table class="spec">
+            <tr><td>Dimensions</td><td>60 × 45 cm (panneau)</td></tr>
+            <tr><td>Matière</td><td>Acier inoxydable, finition miroir</td></tr>
+            <tr><td>Faces</td><td>2 faces personnalisables</td></tr>
+            <tr><td>Usage</td><td>Intérieur & extérieur</td></tr>
+            <tr><td>Finitions de marquage</td><td>Noir, blanc, or ou couleur de votre logo</td></tr>
+          </table>
+
+          <div class="ideal">
+            <span>Instituts & ongleries</span><span>Coffee shops</span><span>Restaurants</span><span>Coiffeurs</span><span>Studios de sport</span><span>Boutiques</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUIT 2 -->
+  <section id="miroir-led" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="serif">Miroir Instagram LED</h2>
+        <div class="ref">Réf. 02 · Intérieur</div>
+      </div>
+
+      <div class="product">
+        <div class="gallery" data-gallery>
+          <div class="main"><img src="img/miroir-mise-en-situation-2.jpg" alt="Miroir Instagram LED personnalisé"></div>
+          <div class="thumbs" style="grid-template-columns:repeat(6,1fr)">
+            <button class="on" data-src="img/miroir-mise-en-situation-2.jpg"><img src="img/miroir-mise-en-situation-2.jpg" alt=""></button>
+            <button data-src="img/miroir-mise-en-situation-1.jpg"><img src="img/miroir-mise-en-situation-1.jpg" alt=""></button>
+            <button data-src="img/miroir-led.jpg"><img src="img/miroir-led.jpg" alt=""></button>
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="eyebrow">Miroir rétroéclairé · Interface type post Instagram</div>
+          <h3 class="serif">Le selfie que vos clients publient à votre place.</h3>
+          <p class="pitch">Un miroir en forme de smartphone qui reprend l'écran d'un post Instagram à votre nom : photo de profil, pseudo, bio, hashtags et compteurs. Le client se place dans le cadre, prend la photo et publie. Votre compte apparaît dans chaque story.</p>
+
+          <div class="price"><b>189 €</b><span>HT / unité · 226,80 € TTC</span></div>
+          <div class="format">Format 80 × 40 cm</div>
+
+          <ul class="feat">
+            <li>Rétroéclairage LED pour un halo lumineux et une photo flatteuse</li>
+            <li>Interrupteur à capteur tactile intégré au miroir</li>
+            <li>Indice IP44 : supporte l'humidité (salon, salle d'eau, cabine)</li>
+            <li>Interface 100 % personnalisée : pseudo, logo, bio, hashtags</li>
+          </ul>
+
+          <table class="spec">
+            <tr><td>Dimensions</td><td>80 × 40 cm</td></tr>
+            <tr><td>Éclairage</td><td>LED rétroéclairée</td></tr>
+            <tr><td>Allumage</td><td>Capteur tactile sur la face</td></tr>
+            <tr><td>Protection</td><td>IP44</td></tr>
+            <tr><td>Pose</td><td>Murale ou posée au sol contre un mur</td></tr>
+          </table>
+
+          <div class="ideal">
+            <span>Salons de coiffure</span><span>Barbiers</span><span>Instituts</span><span>Restaurants</span><span>Salles de sport</span><span>Événements</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUEL PRODUIT -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="serif">Lequel choisir ?</h2></div>
+      <div class="compare">
+        <div class="cmp">
+          <div class="ref">Pour attirer depuis la rue</div>
+          <h4 class="serif">Stop-trottoir miroir</h4>
+          <p>Il se place dehors et fait entrer les gens. Il remplace l'ardoise classique par un support haut de gamme qui affiche vos infos et capte l'œil des passants.</p>
+        </div>
+        <div class="cmp">
+          <div class="ref">Pour faire parler de vous en ligne</div>
+          <h4 class="serif">Miroir Instagram LED</h4>
+          <p>Il se place à l'intérieur, sur le parcours client. Chaque photo prise devant devient une publication qui affiche votre compte, et donc de la visibilité gratuite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="serif">Comment ça se passe</h2></div>
+      <div class="steps">
+        <div class="step"><b>Vous envoyez vos éléments</b><p>Logo, nom de compte Instagram, horaires, téléphone, texte souhaité.</p></div>
+        <div class="step"><b>On crée la maquette</b><p>Vous recevez un visuel du produit à vos couleurs, retouchable.</p></div>
+        <div class="step"><b>Vous validez</b><p>La fabrication démarre uniquement après votre accord écrit.</p></div>
+        <div class="step"><b>Livraison</b><p>Produit livré emballé, prêt à poser. Délai confirmé à la commande.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEVIS -->
+  <section id="devis" style="padding-top:0">
+    <div class="wrap">
+      <div class="quote">
+        <div>
+          <div class="eyebrow" style="color:#9a9a9a">Simulateur</div>
+          <h2 class="serif">Estimez votre commande</h2>
+          <p>Choisissez les quantités puis envoyez-nous votre demande en un clic sur WhatsApp : le récapitulatif est déjà rédigé.</p>
+        </div>
+        <div>
+          <div class="row">
+            <label>Stop-trottoir miroir<small>60 × 45 cm · 259 € HT</small></label>
+            <div class="qty"><button data-q="a" data-d="-1" aria-label="Moins">−</button><output id="qa">1</output><button data-q="a" data-d="1" aria-label="Plus">+</button></div>
+          </div>
+          <div class="row">
+            <label>Miroir Instagram LED<small>80 × 40 cm · 189 € HT</small></label>
+            <div class="qty"><button data-q="b" data-d="-1" aria-label="Moins">−</button><output id="qb">0</output><button data-q="b" data-d="1" aria-label="Plus">+</button></div>
+          </div>
+          <div class="tot"><span>Total HT</span><span id="ht">259,00 €</span></div>
+          <div class="tot"><span>TVA 20 %</span><span id="tva">51,80 €</span></div>
+          <div class="tot big"><span>Total TTC</span><span id="ttc">310,80 €</span></div>
+          <div class="btns">
+            <a class="btn btn-wa" id="wa-devis" href="https://wa.me/33775758121" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>Envoyer sur WhatsApp</a>
+            <a class="btn btn-call" href="tel:+33775758121"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Appeler</a>
+          </div>
+          <button class="linklike" id="copy">ou copier le récapitulatif</button>
+          <div class="copied" id="copied"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="serif">Questions fréquentes</h2></div>
+      <details><summary>Que puis-je faire figurer sur le produit ?</summary><p>Votre logo, le nom de votre commerce, votre compte Instagram, vos horaires, votre numéro, une accroche ou une offre. Pour le miroir LED, on reproduit l'interface d'un post : photo de profil, bio, hashtags et compteurs.</p></details>
+      <details><summary>Je n'ai pas de logo en haute définition, c'est un problème ?</summary><p>Non. Envoyez ce que vous avez (photo, capture de votre page Instagram) : on prépare la maquette et on vous la soumet avant fabrication.</p></details>
+      <details><summary>Le stop-trottoir tient-il dehors toute la journée ?</summary><p>Oui, l'inox ne rouille pas et le marquage est prévu pour l'extérieur. Comme tout chevalet, il est conseillé de le rentrer le soir et par grand vent.</p></details>
+      <details><summary>Le miroir LED doit-il être branché ?</summary><p>Oui, l'éclairage LED fonctionne sur secteur. Prévoyez une prise à proximité de l'emplacement choisi.</p></details>
+      <details><summary>Les prix sont-ils HT ?</summary><p>Oui, tous les prix de ce catalogue sont hors taxes, TVA 20 % en sus. Contactez-nous pour une commande en quantité ou un équipement multi-boutiques.</p></details>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="contact">
+        <div class="eyebrow">Une question, une maquette, un devis</div>
+        <h2 class="serif">Parlons de votre commerce</h2>
+        <p>Envoyez-nous votre logo ou votre compte Instagram sur WhatsApp : on vous renvoie une maquette de votre produit.</p>
+        <div class="num">07 75 75 81 21</div>
+        <div class="btns">
+          <a class="btn btn-wa" href="https://wa.me/33775758121?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20miroirs%20personnalis%C3%A9s%20pour%20mon%20commerce." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</a>
+          <a class="btn btn-dark" href="tel:+33775758121"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Appeler</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Centr Supply · Calvados, Normandie · Prix HT valables à la date d'édition du catalogue. Visuels non contractuels : exemples de réalisations, chaque produit est fabriqué à vos couleurs.</div>
+</footer>
+
+<a class="fab" href="https://wa.me/33775758121" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 1.7.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></a>
+
+<script>
+  // Galerie
+  document.querySelectorAll('[data-gallery]').forEach(g=>{
+    const main=g.querySelector('.main img');
+    g.querySelectorAll('.thumbs button').forEach(b=>b.addEventListener('click',()=>{
+      main.src=b.dataset.src;
+      g.querySelectorAll('.thumbs button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+    }));
+  });
+
+  // Simulateur
+  const P={a:259,b:189}, Q={a:1,b:0};
+  const fmt=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+  function render(){
+    document.getElementById('qa').textContent=Q.a;
+    document.getElementById('qb').textContent=Q.b;
+    const ht=Q.a*P.a+Q.b*P.b, tva=Math.round(ht*20)/100;
+    document.getElementById('ht').textContent=fmt(ht);
+    document.getElementById('tva').textContent=fmt(tva);
+    document.getElementById('ttc').textContent=fmt(ht+tva);
+    document.getElementById('wa-devis').href='https://wa.me/33775758121?text='+encodeURIComponent('Bonjour, '+recap(ht,tva).join('\n'));
+    return {ht,tva};
+  }
+  function recap(ht,tva){
+    const lines=['je souhaite un devis :'];
+    if(Q.a) lines.push(`- ${Q.a} × Stop-trottoir miroir 60×45 cm (259 € HT)`);
+    if(Q.b) lines.push(`- ${Q.b} × Miroir Instagram LED 80×40 cm (189 € HT)`);
+    lines.push(`Total HT : ${fmt(ht)} · TTC : ${fmt(ht+tva)}`);
+    return lines;
+  }
+  document.querySelectorAll('.qty button').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.q; Q[k]=Math.max(0,Math.min(99,Q[k]+(+b.dataset.d))); render();
+  }));
+  document.getElementById('copy').addEventListener('click',async()=>{
+    const {ht,tva}=render();
+    const lines=['Demande de devis'].concat(recap(ht,tva).slice(1));
+    const out=document.getElementById('copied');
+    try{await navigator.clipboard.writeText(lines.join('\n'));out.textContent='Récapitulatif copié.';}
+    catch(e){out.textContent=lines.join(' · ');}
+  });
+  render();
+</script>
+</body>
+</html>
